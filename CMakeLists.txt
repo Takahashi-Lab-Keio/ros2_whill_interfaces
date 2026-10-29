@@ -7,6 +7,9 @@ if(NOT WIN32)
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+find_package(geometry_msgs REQUIRED)
 # find the ROS message code generators
  find_package(rosidl_default_generators REQUIRED)
 
@@ -14,6 +17,7 @@ find_package(ament_cmake REQUIRED)
  set(msg_files
    "msg/WhillModelC.msg"
    "msg/WhillSpeedProfile.msg"
+   "msg/CommandWrite.msg"
  )
 
 # declare the service files to generate code for
@@ -26,6 +30,7 @@ find_package(ament_cmake REQUIRED)
  rosidl_generate_interfaces(${PROJECT_NAME}
    ${msg_files}
    ${srv_files}
+   DEPENDENCIES std_msgs builtin_interfaces geometry_msgs
  )
 
  ament_export_dependencies(rosidl_default_runtime)
